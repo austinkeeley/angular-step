@@ -6,15 +6,17 @@
  * An AngularJS way of building clean "wizard" like applications.
  */
 
-
-// As a sidenote, I've used the angular-ui bootstrap module as
-// a model for how to write this.
 angular.module('angular.step', [])
 
 .controller('StepSetController', ['$scope', function($scope) {
+
   var ctrl = this,
       index = -1, // points to the current step in the steps array
       steps = ctrl.steps = $scope.steps = [];
+
+  $scope.nextEnabled = true;
+  $scope.previousEnabled = false;
+  $scope.submitEnabled = false;
 
   /*
    * Moves to the next step
@@ -24,17 +26,16 @@ angular.module('angular.step', [])
       console.debug('No steps provided.');
       return;
     }
-
     // If we're at the last step, then stay there.
     if (index == steps.length-1) {
       console.debug('At last step.');
       return;
     }
-    else {
-      steps[index].isDisplayed = false;
-      index++;
-      steps[index].isDisplayed = true;
-    }
+    
+    steps[index++].isDisplayed = false;
+    steps[index].isDisplayed = true;
+
+    ctrl.setButtons();
   }; // $scope.next
 
   /*
@@ -50,11 +51,9 @@ angular.module('angular.step', [])
       console.debug('At first step');
       return;
     }
-    else {
-      steps[index].isDisplayed = false;
-      index--;
-      steps[index].isDisplayed = true;
-    }
+    steps[index--].isDisplayed = false;
+    steps[index].isDisplayed = true;
+    ctrl.setButtons();
   }; // $scope.previous
 
   /*
@@ -66,6 +65,24 @@ angular.module('angular.step', [])
     if (index == -1) {
       index = 0;
       steps[0].isDisplayed = true;
+    }
+  };
+
+  /*
+   * Sets the correct buttons to be enabled or disabled.
+   */
+  ctrl.setButtons = function() {
+    if (index == steps.length - 1) {
+      $scope.nextEnabled = false;
+      $scope.submitEnabled = true;
+    }
+    else if (index === 0) {
+      $scope.previousEnabled = false;
+    }
+    else {
+      $scope.nextEnabled = true;
+      $scope.previousEnabled = true;
+      $scope.submitEnabled = false;
     }
   };
 
@@ -86,6 +103,9 @@ angular.module('angular.step', [])
     restrict: 'EA',
     transclude: true,
     scope: {
+      nextText: '@',
+      previousText: '@',
+      submitText: '@'
     },
     controller: 'StepSetController',
     templateUrl: 'partials/stepset.html',
