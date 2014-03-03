@@ -7,6 +7,8 @@ keep track of which form was in use and how the buttons should respond.
 
 I created this as a cleaner alternative to use in future projects.
 
+Here is a JSFiddle of it in use: http://jsfiddle.net/austinkeeley/2fMsL/
+
 Here is a quick example:
 
     <stepset next-text="Next" previous-text="Previous" submit-text="Submit">
