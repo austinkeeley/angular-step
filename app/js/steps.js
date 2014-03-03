@@ -144,11 +144,8 @@ angular.module('angular.step', [])
       $scope.isDisplayed = false;
     },
     compile: function(elm, attrs, transclude) {
-      console.log("in compile");
       return function postLink(scope, elm, attrs, ctrl) {
-        console.log(ctrl);
         ctrl.addStep(scope);
-      
       };
     }
   };

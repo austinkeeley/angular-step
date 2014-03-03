@@ -3,9 +3,9 @@
     <div id="currentStep" ng-transclude>
     </div>
     <span>
-        <button ng-click="previous()" ng-disabled="!previousEnabled">{{previousText}}</button>
-        <button ng-click="next()" ng-disabled="!nextEnabled">{{nextText}}</button>
-        <button ng-click="submit()" ng-disabled="!submitEnabled">{{submitText}}</button>
+        <button class="btn" ng-click="previous()" ng-disabled="!previousEnabled">{{previousText}}</button>
+        <button class="btn" ng-click="next()" ng-disabled="!nextEnabled">{{nextText}}</button>
+        <button class="btn btn-success" ng-click="submit()" ng-disabled="!submitEnabled">{{submitText}}</button>
     </span>
   </div>
 </div>
