@@ -56,6 +56,10 @@ angular.module('angular.step', [])
     ctrl.setButtons();
   }; // $scope.previous
 
+  $scope.submit = function() {
+    $scope.submitAction();
+  };
+
   /*
    * Adds a step to the end of the step list and
    * sets the index to 0 if it's the first step added.
@@ -105,7 +109,8 @@ angular.module('angular.step', [])
     scope: {
       nextText: '@',
       previousText: '@',
-      submitText: '@'
+      submitText: '@',
+      submitAction: '='
     },
     controller: 'StepSetController',
     templateUrl: 'partials/stepset.html',

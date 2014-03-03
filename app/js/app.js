@@ -3,4 +3,10 @@
  * An example app that uses the angularjs step.
  */
 
-angular.module('testStep', ['angular.step']);
+var app = angular.module('testStep', ['angular.step']);
+
+app.run(function($rootScope) {
+  $rootScope.testSubmit = function() {
+    alert("You clicked submit.");
+  };
+});
