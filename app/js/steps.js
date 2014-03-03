@@ -26,14 +26,16 @@ angular.module('angular.step', [])
     }
 
     // If we're at the last step, then stay there.
-    if (currentStep == steps.length-1) {
+    if (index == steps.length-1) {
       console.debug('At last step.');
       return;
     }
     else {
+      steps[index].isDisplayed = false;
       index++;
+      steps[index].isDisplayed = true;
     }
-  };
+  }; // $scope.next
 
   /*
    * Moves to the previous step
@@ -49,9 +51,11 @@ angular.module('angular.step', [])
       return;
     }
     else {
+      steps[index].isDisplayed = false;
       index--;
+      steps[index].isDisplayed = true;
     }
-  };
+  }; // $scope.previous
 
   /*
    * Adds a step to the end of the step list and
@@ -61,6 +65,7 @@ angular.module('angular.step', [])
     ctrl.steps.push(obj);
     if (index == -1) {
       index = 0;
+      steps[0].isDisplayed = true;
     }
   };
 
@@ -102,6 +107,7 @@ angular.module('angular.step', [])
  * TODO: put example here.
  */
 .directive('step', ['$parse', function($parse) {
+  var d = this;
   return {
     require: '^stepset',
     restrict: 'EA', // TODO: see above
@@ -109,10 +115,21 @@ angular.module('angular.step', [])
     templateUrl: 'partials/step.html',
     transclude: true,
     scope: {
+      title: '@',
+      description: '@'
     },
-    controller: function() {
+    controller: function($scope) {
+      // Determines if it should be displayed.  The stepset directive
+      // controller needs to make sure only one shows up at a time.
+      $scope.isDisplayed = false;
     },
     compile: function(elm, attrs, transclude) {
+      console.log("in compile");
+      return function postLink(scope, elm, attrs, ctrl) {
+        console.log(ctrl);
+        ctrl.addStep(scope);
+      
+      };
     }
   };
 }])
