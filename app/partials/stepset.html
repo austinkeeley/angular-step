@@ -1,11 +1,11 @@
 <div>
+  <div id="steps" ng-transclude>
+  </div>
   <div id="navBar">
-    <div id="currentStep" ng-transclude>
-    </div>
     <span>
-        <button class="btn" ng-click="previous()" ng-disabled="!previousEnabled">{{previousText}}</button>
-        <button class="btn" ng-click="next()" ng-disabled="!nextEnabled">{{nextText}}</button>
-        <button class="btn btn-success" ng-click="submit()" ng-disabled="!submitEnabled">{{submitText}}</button>
+      <button class="btn" ng-click="previous()" ng-disabled="!previousEnabled">{{previousText}}</button>
+      <button class="btn" ng-click="next()" ng-disabled="!nextEnabled">{{nextText}}</button>
+      <button class="btn btn-success" ng-click="submit()" ng-disabled="!submitEnabled">{{submitText}}</button>
     </span>
   </div>
 </div>
