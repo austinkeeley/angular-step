@@ -123,7 +123,8 @@ angular.module('angular.step', [])
       nextText: '@',
       previousText: '@',
       submitText: '@',
-      submitAction: '='
+      submitAction: '=',
+      showProgressBar: '='
     },
     controller: 'StepSetController',
     templateUrl: 'partials/stepset.html',

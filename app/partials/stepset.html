@@ -2,7 +2,7 @@
   <form name="stepForm">
     <div id="steps" ng-transclude>
     </div>
-    <div progress-bar></div>
+    <div progress-bar ng-if="showProgressBar"></div>
     <div id="navBar">
       <span>
         <button class="btn" ng-click="previous()" ng-disabled="!previousEnabled">{{previousText}}</button>
