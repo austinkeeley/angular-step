@@ -56,10 +56,20 @@ angular.module('angular.step', [])
     ctrl.setButtons();
   }; // $scope.previous
 
+  /*
+   * Sets the index
+   */
+  ctrl.setIndex = function(newIndex) {
+    steps[index].isDisplayed = false;
+    index = newIndex;
+    steps[index].isDisplayed = true;
+    ctrl.setButtons();
+  };
+
   $scope.submit = function() {
     $scope.submitAction();
   };
-
+  
   /*
    * Adds a step to the end of the step list and
    * sets the index to 0 if it's the first step added.
@@ -78,10 +88,13 @@ angular.module('angular.step', [])
   ctrl.setButtons = function() {
     if (index == steps.length - 1) {
       $scope.nextEnabled = false;
+      $scope.previousEnabled = true;
       $scope.submitEnabled = true;
     }
     else if (index === 0) {
+      $scope.nextEnabled = true;
       $scope.previousEnabled = false;
+      // This does not consider the case that there's one step
     }
     else {
       $scope.nextEnabled = true;
@@ -154,6 +167,33 @@ angular.module('angular.step', [])
       };
     }
   };
+}])
+
+.directive('progressBar', [function() {
+  var stepController;
+  return {
+    require: '^stepset',
+    replace: true,
+    templateUrl: 'partials/progress_bar.html',
+    scope: {
+    },
+    controller: function($scope) {
+      
+      /*
+       * Jumps to a step
+       */
+      $scope.jump = function(newIndex) {
+        stepController.setIndex(newIndex);
+      };
+
+    },
+    compile: function(elm, attrs, transclude) {
+      return function postLink(scope, elm, attrs, ctrl) {
+        stepController = ctrl;
+      };
+    }
+  };
+
 }])
 
 ;

@@ -1,0 +1,15 @@
+ul.progress-bar {
+  list-style-type: none;
+  margin: 10px, 0, 10px, 0;
+  padding: 0;
+}
+
+li.progress-bar-item {
+  display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+li.current-step {
+  font-weight: bold;
+}
