@@ -119,6 +119,7 @@ angular.module('angular.step', [])
   return {
     restrict: 'EA',
     transclude: true,
+    replace: true,
     scope: {
       nextText: '@',
       previousText: '@',

@@ -1,9 +1,11 @@
 <div>
   <form name="stepForm">
-    <div id="steps" ng-transclude>
+    <div class="step-holder">
+      <div id="steps" ng-transclude>
+      </div>
     </div>
     <div progress-bar ng-if="showProgressBar"></div>
-    <div id="navBar">
+    <div class="nav-bar" id="navBar">
       <span>
         <button class="btn" ng-click="previous()" ng-disabled="!previousEnabled">{{previousText}}</button>
         <button class="btn" ng-click="next()" ng-disabled="!nextEnabled">{{nextText}}</button>
