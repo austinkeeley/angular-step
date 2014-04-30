@@ -265,14 +265,17 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          '<%= config.dist %>/scripts/scripts.js': [
-            '<%= config.dist %>/scripts/scripts.js'
+          '<%= config.dist %>/scripts/steps.min.js': [
+            '<%= config.dist %>/scripts/steps.js'
           ]
         }
       }
     },
     concat: {
-      dist: {}
+      dist: {
+        src: ['<%= config.app %>/scripts/steps.js'],
+        dest: '<%= config.dist %>/scripts/steps.js'
+      }
     },
 
     // Copies remaining files to places other tasks can use
@@ -361,7 +364,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy:dist',
-    'rev',
+    //'rev',
     'usemin',
     'htmlmin'
   ]);
