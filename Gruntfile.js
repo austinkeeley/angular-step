@@ -12,6 +12,8 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -132,6 +134,18 @@ module.exports = function (grunt) {
         '!<%= config.app %>/scripts/vendor/*',
         'test/spec/{,*/}*.js'
       ]
+    },
+
+    jasmine: {
+      test: {
+        src: ['<%= config.app %>/scripts/*.js'],
+        options: {
+          specs: '<%= config.app %>/test/unit/*.js',
+          vendor: [
+            'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js'
+          ]
+        }
+      }
     },
 
     // Add vendor prefixed styles
@@ -334,7 +348,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'connect:test',
-      'mocha'
+      'jasmine'
     ]);
   });
 
