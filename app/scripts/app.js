@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * app.js
  * An example app that uses the angularjs step.

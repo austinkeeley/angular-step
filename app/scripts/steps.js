@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @ngdoc overview
  * @name angular-step
@@ -27,11 +29,11 @@ angular.module('angular.step', [])
       return;
     }
     // If we're at the last step, then stay there.
-    if (index == steps.length-1) {
+    if (index === steps.length-1) {
       console.debug('At last step.');
       return;
     }
-    
+
     steps[index++].isDisplayed = false;
     steps[index].isDisplayed = true;
 
@@ -69,14 +71,14 @@ angular.module('angular.step', [])
   $scope.submit = function() {
     $scope.submitAction();
   };
-  
+
   /*
    * Adds a step to the end of the step list and
    * sets the index to 0 if it's the first step added.
    */
   ctrl.addStep = function(obj) {
     ctrl.steps.push(obj);
-    if (index == -1) {
+    if (index === -1) {
       index = 0;
       steps[0].isDisplayed = true;
     }
@@ -86,7 +88,7 @@ angular.module('angular.step', [])
    * Sets the correct buttons to be enabled or disabled.
    */
   ctrl.setButtons = function() {
-    if (index == steps.length - 1) {
+    if (index === steps.length - 1) {
       $scope.nextEnabled = false;
       $scope.previousEnabled = true;
       $scope.submitEnabled = true;
@@ -180,7 +182,7 @@ angular.module('angular.step', [])
     scope: {
     },
     controller: function($scope) {
-      
+
       /*
        * Jumps to a step
        */
