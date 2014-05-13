@@ -2,7 +2,27 @@
  * Unit tests
  */
 
+
+beforeEach(module('angular.step'));
+beforeEach(module('partials'));
+
 describe('Step Holder module', function() {
+    
+  var elm, $scope;    
+    
+  function createDirective(elm, $scope, $compile) {
+      
+  }    
+    
+  beforeEach(inject(function(_$rootScope_, _$compile_) {
+    $scope = _$rootScope_.$new();
+    var template = '<stepset><step></step></stepset>';
+    _$compile_(template)($scope);
+    $scope.$digest();
+    
+  })); 
+    
+    
   it('Reads div elements as steps', function() {
   });
   
@@ -13,6 +33,7 @@ describe('Step Holder module', function() {
   });
 
   it('Will not go past the maximum number of steps', function() {
+      
   });
 
   it('Will not go past the minimum number of steps', function() {

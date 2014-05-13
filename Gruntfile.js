@@ -106,6 +106,18 @@ module.exports = function (grunt) {
         }
       }
     },
+    
+    // html2js
+    html2js: {
+      options: {
+        base: 'app',
+        module: 'partials'
+      },
+      dist: {
+          src: ['app/partials/*.html'],
+          dest: 'app/scripts/templates.js'
+      }  
+    },
 
     // Empties folders to start fresh
     clean: {
@@ -138,11 +150,23 @@ module.exports = function (grunt) {
 
     jasmine: {
       test: {
-        src: ['<%= config.app %>/scripts/*.js'],
+        src: ['<%= config.app %>/scripts/steps.js'],
         options: {
           specs: '<%= config.app %>/test/unit/*.js',
+          template: require('grunt-template-jasmine-istanbul'),
+          templateOptions: {
+              coverage: 'coverage.json',
+              report: {
+                  type: 'html',
+                  options: {
+                      dir: 'coverage'
+                  }
+              }
+          },
           vendor: [
-            'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js'
+            'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js',
+            'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-mocks.js',
+            'app/scripts/templates.js'
           ]
         }
       }
